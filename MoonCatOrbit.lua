@@ -1,30 +1,28 @@
---// MoonCat Orbit GUI Script (Fixed)
--- GUI buttons + Moon Cat follow/orbit
+--// Mooncat Orbit GUI Script (Fixed Name)
 
---// Destroy old GUI if it exists
-if game:GetService("CoreGui"):FindFirstChild("MoonCatGUI") then
-    game:GetService("CoreGui").MoonCatGUI:Destroy()
+-- Destroy old GUI if it exists
+if game:GetService("CoreGui"):FindFirstChild("MooncatGUI") then
+    game:GetService("CoreGui").MooncatGUI:Destroy()
 end
 
---// Create ScreenGui
+-- Create ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "MoonCatGUI"
+ScreenGui.Name = "MooncatGUI"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = game:GetService("CoreGui")
 
---// Main Frame
+-- Main Frame
 local Frame = Instance.new("Frame")
 Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(50,50,50)
+Frame.BackgroundColor3 = Color3.fromRGB(40,40,40)
 Frame.BorderSizePixel = 2
 Frame.Size = UDim2.new(0,200,0,120)
 Frame.Position = UDim2.new(0.4,0,0.3,0)
 
---// UICorner for rounded edges
 local UICorner = Instance.new("UICorner", Frame)
 UICorner.CornerRadius = UDim.new(0,12)
 
---// Follow Button
+-- Follow Button
 local FollowButton = Instance.new("TextButton")
 FollowButton.Parent = Frame
 FollowButton.Size = UDim2.new(0.8,0,0.3,0)
@@ -34,7 +32,7 @@ FollowButton.BackgroundColor3 = Color3.fromRGB(70,130,180)
 FollowButton.TextColor3 = Color3.fromRGB(255,255,255)
 Instance.new("UICorner", FollowButton).CornerRadius = UDim.new(0,8)
 
---// Refresh Button
+-- Refresh Button
 local RefreshButton = Instance.new("TextButton")
 RefreshButton.Parent = Frame
 RefreshButton.Size = UDim2.new(0.8,0,0.3,0)
@@ -44,7 +42,7 @@ RefreshButton.BackgroundColor3 = Color3.fromRGB(220,20,60)
 RefreshButton.TextColor3 = Color3.fromRGB(255,255,255)
 Instance.new("UICorner", RefreshButton).CornerRadius = UDim.new(0,8)
 
---// Orbit function
+-- Orbit function
 local runService = game:GetService("RunService")
 local orbitConnection
 
@@ -55,15 +53,15 @@ local function startOrbit()
     local char = player.Character or player.CharacterAdded:Wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
 
-    -- Try to find Moon Cat
-    local moonCat = workspace:FindFirstChild("Moon Cat")
+    -- Look for Mooncat
+    local moonCat = workspace:FindFirstChild("Mooncat")
     if not moonCat then
-        warn("❌ Could not find 'Moon Cat' in Workspace!")
+        warn("❌ Could not find 'Mooncat' in Workspace!")
         return
     end
     local moonCatHRP = moonCat:FindFirstChild("HumanoidRootPart") or moonCat:FindFirstChildWhichIsA("BasePart")
     if not moonCatHRP then
-        warn("❌ Moon Cat has no HumanoidRootPart/BasePart")
+        warn("❌ Mooncat has no HumanoidRootPart/BasePart")
         return
     end
 
@@ -85,6 +83,6 @@ local function stopOrbit()
     end
 end
 
---// Button events
+-- Button events
 FollowButton.MouseButton1Click:Connect(startOrbit)
 RefreshButton.MouseButton1Click:Connect(stopOrbit)
